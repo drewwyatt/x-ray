@@ -1,3 +1,14 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+import { spawn } from 'child_process';
+
+const showHiddenFiles = () => {
+  spawn('defaults write com.apple.finder AppleShowAllFiles YES', [], { shell: true });
+  spawn('killall Finder', [], { shell: true });
+};
+
+const hideHiddenFiles = () => {
+  spawn('defaults write com.apple.finder AppleShowAllFiles NO', [], { shell: true });
+  spawn('killall Finder', [], { shell: true });
+};
+
+document.getElementById('show').addEventListener('click', showHiddenFiles);
+document.getElementById('hide').addEventListener('click', hideHiddenFiles);
